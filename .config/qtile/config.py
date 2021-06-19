@@ -60,8 +60,8 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 ]
 
-group_names = [("ALL", {'layout': 'monadtall'}),
-               ("VBOX", {'layout': 'monadtall'}),
+group_names = [("WWW", {'layout': 'monadtall'}),
+               ("VM", {'layout': 'monadtall'}),
                ("MUS", {'layout': 'monadtall'}),
                ("GFX", {'layout': 'floating'})]
 
@@ -107,35 +107,37 @@ colors = [["#282c34", "#282c34"], # panel background
 
 
 widget_defaults = dict(
-    font='Hack Nerd Fonts Mono',
-    fontsize=12,
+    font='FiraCode Nerd Font',
+    fontsize=13,
     padding=2,
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
+def init_widgets_list():
+    widgets_list = [
+                 widget.Sep(
+                     linewidth = 0,
+                     padding = 6,
+                     ),
+
                 widget.GroupBox(
                     font = "Ubuntu Bold",
                     fontsize = 10,
                     margin_y = 5,
-                    margin_x = 0,
-                    padding_y = 5,
+                    margin_x = 5,
+                    padding_y = 0,
                     padding_x = 3,
                     borderwidth = 3,
                     active = colors[2],
                     inactive = colors[7],
                     rounded = True,
-                    highlight_color = colors[1],
+#                    highlight_color = colors[1],
                     highlight_method = "line",
                     this_current_screen_border = colors[6],
                     this_screen_border = colors [4],
                     other_current_screen_border = colors[6],
                     other_screen_border = colors[4],
                     foreground = colors[2],
-#                    background = colors[0]
                     ),
                 widget.Prompt(),
                 widget.WindowName(),
@@ -146,16 +148,47 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.Systray(),
-                widget.CurrentLayout(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+                widget.TextBox(
+                    text = '',
+#                    background = colors[4],
+                    foreground = colors[4],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+                widget.CurrentLayout(
+                    background = colors[4],
+                    padding = 0,
+                    ),
+                widget.TextBox(
+                    text = '',
+                    background = colors[4],
+                    foreground = colors[5],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+                widget.Clock(
+                    foreground = colors[2],
+                    background = colors[5],
+                    format='%Y-%m-%d %a %I:%M %p'
+                    ),
                 widget.QuickExit(),
-            ],
-            opacity=0.65,  
-            margin=3,
-            size=24,
-        ),
-    ),
-]
+            ]
+    return widgets_list
+
+def init_widgets_screen1():
+        widgets_screen1 = init_widgets_list()
+        return widgets_screen1
+
+
+
+def init_screens():
+        return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.55, size=20))]
+
+if __name__ in ["config", "__main__"]:
+        screens = init_screens()
+        widgets_list = init_widgets_list()
+        widgets_screen1 = init_widgets_screen1()
+
 
 # Drag floating layouts.
 mouse = [
