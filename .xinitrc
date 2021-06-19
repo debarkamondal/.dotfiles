@@ -52,3 +52,4 @@ nitrogen --restore &
 picom &
 lxqt-policykit-agent &
 exec qtile
+
