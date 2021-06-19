@@ -182,7 +182,7 @@ def init_widgets_screen1():
 
 
 def init_screens():
-        return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.55, size=20))]
+        return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=3, opacity=0.55, size=20))]
 
 if __name__ in ["config", "__main__"]:
         screens = init_screens()
