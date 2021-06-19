@@ -150,15 +150,19 @@ def init_widgets_list():
                 widget.Systray(),
                 widget.TextBox(
                     text = '',
-#                    background = colors[4],
+#                    background = colors[5],
                     foreground = colors[4],
                     padding = 0,
                     fontsize = 26
                     ),
-                widget.CurrentLayout(
+                widget.Net(
+                    interface = "enp42s0",
+                    format = '{down} ↓↑ {up}',
+                    foreground = colors[2],
                     background = colors[4],
-                    padding = 0,
+                    padding = 5
                     ),
+               
                 widget.TextBox(
                     text = '',
                     background = colors[4],
@@ -169,9 +173,24 @@ def init_widgets_list():
                 widget.Clock(
                     foreground = colors[2],
                     background = colors[5],
-                    format='%Y-%m-%d %a %I:%M %p'
+                    format='%I:%M %p'
                     ),
-                widget.QuickExit(),
+                widget.TextBox(
+                    text = '',
+                    background = colors[5],
+                    foreground = colors[4],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+                 widget.CurrentLayout(
+                    background = colors[4],
+                    padding = 0,
+                    ),
+                 widget.Sep(
+                     linewidth = 0,
+                     padding = 6,
+                     background = colors[4]
+                     ),
             ]
     return widgets_list
 
