@@ -1,9 +1,8 @@
 import os
+import socket
 import subprocess
-from libqtile import hook
 from typing import List  # noqa: F401
-
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -69,7 +68,7 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
-        keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 layout_theme = {"border_width": 2,
         "margin": 4,
@@ -86,12 +85,13 @@ layouts = [
         # layout.Bsp(),
         # layout.Matrix(),
         layout.MonadTall(**layout_theme),
-        layout.MonadWide(**layout_theme)
+        layout.MonadWide(**layout_theme),
         # layout.RatioTile(),
-        # layout.Tile(),
+        layout.Tile(**layout_theme),
         # layout.TreeTab(),
         # layout.VerticalTile(),
         # layout.Zoomy(),
+        layout.Floating(**layout_theme)
         ]
 
 colors = [["#282c34", "#282c34"], # panel background
@@ -103,7 +103,7 @@ colors = [["#282c34", "#282c34"], # panel background
         ["#e1acff", "#e1acff"], # window name
         ["#ecbbfb", "#ecbbfb"]] # backbround for inactive screens
 
-#prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 
 widget_defaults = dict(
@@ -130,8 +130,8 @@ def init_widgets_list():
                 borderwidth = 3,
                 active = colors[2],
                 inactive = colors[7],
-                rounded = True,
-                #                    highlight_color = colors[1],
+                rounded = False,
+                highlight_color = colors[1],
                 highlight_method = "line",
                 this_current_screen_border = colors[6],
                 this_screen_border = colors [4],
@@ -139,8 +139,14 @@ def init_widgets_list():
                 other_screen_border = colors[4],
                 foreground = colors[2],
                 ),
-            widget.Prompt(),
-            widget.WindowName(),
+            widget.Prompt(
+#                prompt = prompt,
+                padding = 10,
+                foreground = colors[6],
+                background = colors[1]
+                ),
+            widget.WindowName(
+                foreground = colors[6]),
             widget.Chord(
                 chords_colors={
                     'launch': ("#ff0000", "#ffffff"),
@@ -150,39 +156,97 @@ def init_widgets_list():
             widget.Systray(),
             widget.TextBox(
                 text = '',
-                #                    background = colors[5],
-                foreground = colors[5],
-                padding = 0,
-                fontsize = 26
-                ),
-            widget.Net(
-                interface = "enp42s0",
-                format = '{down} ↓↑ {up}',
-                foreground = colors[2],
-                background = colors[5],
-                padding = 5
-                ),
-            widget.TextBox(
-                text = '',
-                background = colors[5],
                 foreground = colors[4],
                 padding = 0,
                 fontsize = 26
                 ),
-            widget.TextBox(
-                    text = " ⟳",
-                    padding = 5,
+            widget.Image(
+                filename = "~/.config/qtile/icons/temp.png",
+                scale = "false",
+                margin = 2,
+                background = colors[4]
+                ),
+
+            widget.ThermalSensor(
                     foreground = colors[2],
                     background = colors[4],
-                    fontsize = 14
+                    threshold = 90,
+                    padding = 5
+                    ),
+            widget.TextBox(
+                    text = '',
+                    foreground = colors[5],
+                    background = colors[4],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+
+            widget.Net(
+                    interface = "enp42s0",
+                    format = '{down} ↓↑ {up}',
+                    foreground = colors[2],
+                    background = colors[5],
+                    padding = 5
+                    ),
+            widget.TextBox(
+                    text = '',
+                    foreground = colors[4],
+                    background = colors[5],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+            widget.Image(
+                    filename = "~/.config/qtile/icons/ram.png",
+                    scale = "false",
+                    margin = 2,
+                    background = colors[4]
+                    ),
+            widget.Memory(
+                    foreground = colors[2],
+                    background = colors[4],
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                    padding = 5
+                    ),
+
+            widget.TextBox(
+                    text = '',
+                    background = colors[4],
+                    foreground = colors[5],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+            widget.Image(
+                    filename = "~/.config/qtile/icons/update.png",
+                    scale = "false",
+                    margin = 2,
+                    background = colors[5]
                     ),
             widget.CheckUpdates(
                     update_interval = 1800,
                     distro = "Arch",
                     display_format = "{updates} Updates",
                     foreground = colors[2],
-                    #                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+                    background = colors[5]
+                    ),
+            widget.TextBox(
+                    text = '',
+                    background = colors[5],
+                    foreground = colors[4],
+                    padding = 0,
+                    fontsize = 26
+                    ),
+            widget.Image(
+                    filename = "~/.config/qtile/icons/vol.png",
+                    scale = "false",
+                    margin = 2,
                     background = colors[4]
+                    ),
+
+            widget.Volume(
+                    foreground = colors[2],
+                    background = colors[4],
+                    padding = 5
                     ),
             widget.TextBox(
                     text = '',
@@ -203,9 +267,17 @@ def init_widgets_list():
                     padding = 0,
                     fontsize = 26
                     ),
-            widget.CurrentLayout(
+            widget.CurrentLayoutIcon(
+                    custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
+                    foreground = colors[0],
                     background = colors[4],
                     padding = 0,
+                    scale = 0.7
+                    ),
+
+            widget.CurrentLayout(
+                    background = colors[4],
+                    padding = 3,
                     ),
             widget.Sep(
                     linewidth = 0,
@@ -217,7 +289,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-        return widgets_screen1
+    return widgets_screen1
 
 
 
@@ -226,8 +298,8 @@ def init_screens():
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
-        widgets_list = init_widgets_list()
-        widgets_screen1 = init_widgets_screen1()
+    widgets_list = init_widgets_list()
+    widgets_screen1 = init_widgets_screen1()
 
 
 # Drag floating layouts.
@@ -252,13 +324,12 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='makebranch'),  # gitk
     Match(wm_class='maketag'),  # gitk
     Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(wm_class='xdman-Main'),  # ssh-askpass
+    Match(wm_class='xdman-Main'),  # xdman 
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
     ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
