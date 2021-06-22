@@ -7,3 +7,4 @@ if status is-login
         exec startx -- -keeptty
     end
 end
+alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
