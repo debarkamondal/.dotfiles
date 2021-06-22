@@ -79,12 +79,12 @@ layout_theme = {"border_width": 2,
 
 layouts = [
         # layout.Columns(border_focus_stack='#d75f5f'),
+        layout.MonadTall(**layout_theme),
         layout.Max(**layout_theme),
         # Try more layouts by unleashing below layouts.
         # layout.Stack(num_stacks=2),
         # layout.Bsp(),
         # layout.Matrix(),
-        layout.MonadTall(**layout_theme),
         layout.MonadWide(**layout_theme),
         # layout.RatioTile(),
         layout.Tile(**layout_theme),
