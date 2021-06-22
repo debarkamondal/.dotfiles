@@ -146,7 +146,9 @@ def init_widgets_list():
                 background = colors[1]
                 ),
             widget.WindowName(
-                foreground = colors[6]),
+                foreground = colors[6],
+                format = '{name}',
+                ),
             widget.Chord(
                 chords_colors={
                     'launch': ("#ff0000", "#ffffff"),
