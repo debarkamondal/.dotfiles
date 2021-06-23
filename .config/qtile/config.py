@@ -231,7 +231,6 @@ def init_widgets_list():
                     display_format = "{updates} Updates",
                     no_update_string = 'No updates',
                     foreground = colors[2],
-             #       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                     execute = "alacritty -e sudo pacman -Syu",
                     background = colors[5]
                     ),
