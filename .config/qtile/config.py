@@ -229,8 +229,10 @@ def init_widgets_list():
                     update_interval = 1800,
                     distro = "Arch",
                     display_format = "{updates} Updates",
+                    no_update_string = 'No updates',
                     foreground = colors[2],
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+             #       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+                    execute = "alacritty -e sudo pacman -Syu",
                     background = colors[5]
                     ),
             widget.TextBox(
