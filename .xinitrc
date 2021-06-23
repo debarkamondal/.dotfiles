@@ -8,15 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -24,15 +16,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -52,5 +36,5 @@ fi
 xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Downloads/wallpapers/beautiful-anime-girl-under-umbrella-live-wallpaper.mp4 &
 picom &
 lxqt-policykit-agent &
-exec qtile
+exec dbus-launch --exit-with-session qtile
 
