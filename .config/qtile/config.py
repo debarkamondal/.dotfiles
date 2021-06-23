@@ -10,7 +10,8 @@ from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
 mod = "mod4"
 terminal = guess_terminal()
-
+browser = "brave"
+file_manager = "nautilus"
 keys = [
         # Switch between windows
         Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -32,9 +33,9 @@ keys = [
 
         # Grow windows. If current window is on the edge of screen and direction
         # will be to screen edge - window would shrink.
-        Key([mod, "control"], "h", lazy.layout.grow_left(),
+        Key([mod, "control"], "h", lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
             desc="Grow window to the left"),
-        Key([mod, "control"], "l", lazy.layout.grow_right(),
+        Key([mod, "control"], "l", lazy.layout.grow(),
             desc="Grow window to the right"),
         Key([mod, "control"], "j", lazy.layout.grow_down(),
             desc="Grow window down"),
@@ -55,10 +56,11 @@ keys = [
 
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-        Key([mod], "r", lazy.spawncmd(),
-            desc="Spawn a command using a prompt widget"),
-        ]
-
+        Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+        Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
+        Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
+        Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
+    ]
 group_names = [("WWW", {'layout': 'monadtall'}),
         ("VM", {'layout': 'monadtall'}),
         ("MUS", {'layout': 'monadtall'}),
