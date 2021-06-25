@@ -11,7 +11,7 @@ from libqtile.log_utils import logger
 mod = "mod4"
 terminal = guess_terminal()
 browser = "brave"
-file_manager = "nautilus"
+file_manager = "thunar"
 keys = [
         # Switch between windows
         Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -60,7 +60,7 @@ keys = [
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
-    ]
+        ]
 group_names = [("WWW", {'layout': 'monadtall'}),
         ("VM", {'layout': 'monadtall'}),
         ("MUS", {'layout': 'monadtall'}),
@@ -120,6 +120,20 @@ def init_widgets_list():
             widget.Sep(
                 linewidth = 0,
                 padding = 6,
+                background = colors[4],
+                ),
+    widget.QuickExit(
+                default_text = '⏻',
+                countdown_format = '{}',
+                fontsize=16,
+                padding = 2,
+                background = colors[4],
+                ),
+    widget.TextBox(
+                text = '',
+                foreground = colors[4],
+                padding = 0,
+                fontsize = 26
                 ),
 
             widget.GroupBox(
@@ -142,7 +156,7 @@ def init_widgets_list():
                 foreground = colors[2],
                 ),
             widget.Prompt(
-#                prompt = prompt,
+                #                prompt = prompt,
                 padding = 10,
                 foreground = colors[6],
                 background = colors[1]
@@ -190,7 +204,8 @@ def init_widgets_list():
                     format = '{down} ↓↑ {up}',
                     foreground = colors[2],
                     background = colors[5],
-                    padding = 5
+                    padding = 5,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e ping www.google.com')},
                     ),
             widget.TextBox(
                     text = '',
