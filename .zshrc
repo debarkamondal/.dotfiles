@@ -17,3 +17,6 @@ neofetch
 eval "$(starship init zsh)"
 
 alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+zstyle ':completion:*' menu select
+setopt COMPLETE_ALIASES
+zstyle ':completion::complete:*' gain-privileges 1

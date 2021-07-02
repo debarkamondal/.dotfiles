@@ -58,6 +58,8 @@ keys = [
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
+
+#        Key([mod], "s", lazy.spawn(com.spotify.Client), desc="toggle floating"),
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
         ]
@@ -246,7 +248,7 @@ def init_widgets_list():
                     display_format = "{updates} Updates",
                     no_update_string = 'No updates',
                     foreground = colors[2],
-                    execute = "alacritty -e sudo pacman -Syu",
+                    execute = terminal + " -e sudo pacman -Syu",
                     background = colors[5]
                     ),
             widget.TextBox(
@@ -264,6 +266,11 @@ def init_widgets_list():
                     ),
 
             widget.Volume(
+#                    volume_app = 'pamixer',
+#                    get_volume_command = "pamixer --get-volume",
+#                    volume_dowm_command = "pamixer -d 2",
+#                    mute_command = "pamixer -m",
+#                    cardid = 1,
                     foreground = colors[2],
                     background = colors[4],
                     padding = 5
