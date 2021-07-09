@@ -111,7 +111,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 
 widget_defaults = dict(
-        font='FiraCode Nerd Font',
+        font="FiraCode Nerd Font",
         fontsize=13,
         padding=2,
         )

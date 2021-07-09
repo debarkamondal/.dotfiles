@@ -33,7 +33,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 #nitrogen --restore &
-xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Downloads/wallpapers/beautiful-anime-girl-under-umbrella-live-wallpaper.mp4 &
+xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Downloads/wallpapers/mylivewallpapers.com-Shiki-Ryougi-Fate-Grand-Order.mp4 &
 picom &
 lxqt-policykit-agent &
-exec dbus-launch --exit-with-session qtile
+exec dbus-launch --exit-with-session qtile 
