@@ -53,13 +53,12 @@ keys = [
         # Toggle between different layouts as defined below
         Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
         Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
-
-#        Key([mod], "s", lazy.spawn(com.spotify.Client), desc="toggle floating"),
+        Key([mod], "p", lazy.spawn("dmenu_run -p 'Run: '"), desc="run dmenu"), 
+        Key([mod], "s", lazy.spawn("spotify"), desc="run spotify"), 
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
         ]
@@ -124,14 +123,14 @@ def init_widgets_list():
                 padding = 6,
                 background = colors[4],
                 ),
-    widget.QuickExit(
+            widget.QuickExit(
                 default_text = '⏻',
                 countdown_format = '{}',
                 fontsize=16,
                 padding = 2,
                 background = colors[4],
                 ),
-    widget.TextBox(
+            widget.TextBox(
                 text = '',
                 foreground = colors[4],
                 padding = 0,
@@ -175,17 +174,17 @@ def init_widgets_list():
                 ),
             widget.Systray(),
             widget.TextBox(
-                text = '',
-                foreground = colors[4],
-                padding = 0,
-                fontsize = 26
-                ),
+                    text = '',
+                    foreground = colors[4],
+                    padding = 0,
+                    fontsize = 26
+                    ),
             widget.Image(
-                filename = "~/.config/qtile/icons/temp.png",
-                scale = "false",
-                margin = 2,
-                background = colors[4]
-                ),
+                    filename = "~/.config/qtile/icons/temp.png",
+                    scale = "false",
+                    margin = 2,
+                    background = colors[4]
+                    ),
 
             widget.ThermalSensor(
                     foreground = colors[2],
@@ -243,7 +242,7 @@ def init_widgets_list():
                     background = colors[5]
                     ),
             widget.CheckUpdates(
-                    update_interval = 1800,
+                    update_interval = 60,
                     distro = "Arch",
                     display_format = "{updates} Updates",
                     no_update_string = 'No updates',
@@ -266,11 +265,6 @@ def init_widgets_list():
                     ),
 
             widget.Volume(
-#                    volume_app = 'pamixer',
-#                    get_volume_command = "pamixer --get-volume",
-#                    volume_dowm_command = "pamixer -d 2",
-#                    mute_command = "pamixer -m",
-#                    cardid = 1,
                     foreground = colors[2],
                     background = colors[4],
                     padding = 5
