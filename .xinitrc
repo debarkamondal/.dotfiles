@@ -33,7 +33,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 thunar --daemon &
-xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Downloads/wallpapers/mylivewallpapers.com-Shiki-Ryougi-Fate-Grand-Order.mp4 &
+xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Downloads/wallpapers/rem-angry-re-zero-free-live-wallpaper.mp4 &
 picom &
 xmobar &
 lxqt-policykit-agent &
