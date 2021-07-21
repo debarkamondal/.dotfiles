@@ -24,3 +24,4 @@ alias grep='grep --color=auto'
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
 zstyle ':completion::complete:*' gain-privileges 1
+#export PATH=$HOME/.config/rofi/bin:$PATH
