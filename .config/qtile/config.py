@@ -55,7 +55,6 @@ keys = [
         Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-        Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
         Key([mod], "p", lazy.spawn("dmenu_run -p 'Run: '"), desc="run dmenu"), 
         Key([mod], "s", lazy.spawn("spotify"), desc="run spotify"), 
@@ -75,7 +74,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {"border_width": 2,
         "margin": 4,
-        "border_focus": "#53e8da",
+#        "border_focus": "#53e8da",
+        "border_focus": "#ffffff",
         "border_normal": "1D2330"
         }
 
@@ -101,10 +101,12 @@ colors = [["#282c34", "#282c34"], # panel background
         ["#3d3f4b", "#434758"], # background for current screen tab
         ["#ffffff", "#ffffff"], # font color for group names
         ["#ff5555", "#ff5555"], # border line color for current tab
-        ["#51aea6", "#51aea6"], # Odd widget 
-        ["#5159ae", "#5159ae"], # Even Widget
+        ["#ffffff", "#ffffff"], # Odd widget 
+        ["#000000", "#000000"], # Even Widget
         ["#51aea6", "#51aea6"], # window name
-        ["#7883f1", "#7883f1"]] # backbround for inactive screens
+        ["#a3a3a3", "#a3a3a3"],# backbround for inactive screens
+        ["#000000", "#000000"]] # black font
+#        ["#7883f1", "#7883f1"]] # backbround for inactive screens
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -127,8 +129,9 @@ def init_widgets_list():
                 default_text = '⏻',
                 countdown_format = '{}',
                 fontsize=16,
-                padding = 2,
+                padding = 4,
                 background = colors[4],
+                foreground = colors[8],
                 ),
             widget.TextBox(
                 text = '',
@@ -150,7 +153,7 @@ def init_widgets_list():
                 rounded = False,
                 highlight_color = colors[1],
                 highlight_method = "line",
-                this_current_screen_border = colors[6],
+                this_current_screen_border = colors[7],
                 this_screen_border = colors [4],
                 other_current_screen_border = colors[6],
                 other_screen_border = colors[4],
@@ -163,7 +166,7 @@ def init_widgets_list():
                 background = colors[1]
                 ),
             widget.WindowName(
-                foreground = colors[6],
+                foreground = colors[4],
                 format = '{name}',
                 ),
             widget.Chord(
@@ -187,7 +190,7 @@ def init_widgets_list():
                     ),
 
             widget.ThermalSensor(
-                    foreground = colors[2],
+                    foreground = colors[8],
                     background = colors[4],
                     threshold = 90,
                     padding = 5
@@ -222,7 +225,7 @@ def init_widgets_list():
                     background = colors[4]
                     ),
             widget.Memory(
-                    foreground = colors[2],
+                    foreground = colors[8],
                     background = colors[4],
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                     padding = 5
@@ -265,7 +268,7 @@ def init_widgets_list():
                     ),
 
             widget.Volume(
-                    foreground = colors[2],
+                    foreground = colors[8],
                     background = colors[4],
                     padding = 5
                     ),
@@ -297,6 +300,7 @@ def init_widgets_list():
                     ),
 
             widget.CurrentLayout(
+                    foreground = colors[8],
                     background = colors[4],
                     padding = 3,
                     ),
