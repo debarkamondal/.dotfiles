@@ -12,6 +12,7 @@ mod = "mod4"
 terminal = guess_terminal()
 browser = "brave"
 file_manager = "thunar"
+
 keys = [
         # Switch between windows
         Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -56,13 +57,16 @@ keys = [
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
-        Key([mod], "p", lazy.spawn("launcher_misc"), desc="run rofi launcher_misc"), 
+        Key([mod], "r", lazy.spawn("rofi -show combi"), desc="run rofi launcher_misc"), 
+        Key([mod, "shift"], "r", lazy.spawncmd(), desc="run command"), 
         Key([mod], "s", lazy.spawn("spotify"), desc="run spotify"), 
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
         ]
+
 group_names = [("WWW", {'layout': 'monadtall'}),
-        ("VM", {'layout': 'monadtall'}),
+        ("CODE", {'layout': 'monadtall'}),
+        ("SSH", {'layout': 'monadtall'}),
         ("MUS", {'layout': 'monadtall'}),
         ("GFX", {'layout': 'floating'})]
 
@@ -319,7 +323,7 @@ def init_widgets_screen1():
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=3, opacity=0.55, size=20))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=3, opacity=0.6, size=22))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -335,6 +339,10 @@ mouse = [
             start=lazy.window.get_size()),
         Click([mod], "Button2", lazy.window.bring_to_front())
         ]
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([home])
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
