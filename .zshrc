@@ -25,6 +25,6 @@ zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
 zstyle ':completion::complete:*' gain-privileges 1
 #export PATH=$HOME/.config/rofi/bin:$PATH
-export DOCKER_HOST=ssh://dezire@pi.hole
+export DOCKER_HOST=ssh://pi4
 export VISUAL=vim
 export EDITOR=vim
