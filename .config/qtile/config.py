@@ -57,11 +57,12 @@ keys = [
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
-        Key([mod], "r", lazy.spawn("rofi -show combi"), desc="run rofi launcher_misc"), 
+        Key([mod], "p", lazy.spawn("rofi -show combi"), desc="run rofi launcher_misc"), 
         Key([mod, "shift"], "r", lazy.spawncmd(), desc="run command"), 
         Key([mod], "s", lazy.spawn("spotify"), desc="run spotify"), 
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
+        Key([mod], "v", lazy.spawn("code"), desc="Spawn vscode"),
         ]
 
 group_names = [("WWW", {'layout': 'monadtall'}),
