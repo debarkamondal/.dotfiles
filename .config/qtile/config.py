@@ -19,8 +19,26 @@ keys = [
         Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
         Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
         Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-        Key([mod], "space", lazy.layout.next(),
-            desc="Move window focus to other window"),
+        Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
+        Key([mod, "shift"], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+        # Multi-monitor control
+        Key([mod], "q",
+            lazy.to_screen(0),
+            desc='Keyboard focus to monitor 1'
+            ),
+        Key([mod], "w",
+            lazy.to_screen(1),
+            desc='Keyboard focus to monitor 2'
+            ),
+        ### Switch focus of monitors
+        Key([mod], "period",
+            lazy.next_screen(),
+            desc='Move focus to next monitor'
+            ),
+        Key([mod], "comma",
+            lazy.prev_screen(),
+            desc='Move focus to prev monitor'
+            ),
 
         # Move windows between left/right columns or move up/down in current stack.
         # Moving out of range in Columns layout will create new column.
@@ -48,16 +66,17 @@ keys = [
         # Unsplit = 1 window displayed, like Max layout, but still with
         # multiple stack panes
         Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
-            desc="Toggle between split and unsplit sides of stack"),
+                desc="Toggle between split and unsplit sides of stack"),
         Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
         # Toggle between different layouts as defined below
-        Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
         Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
         Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
         Key([mod], "p", lazy.spawn("rofi -show combi"), desc="run rofi launcher_misc"), 
+
+
         Key([mod, "shift"], "r", lazy.spawncmd(), desc="run command"), 
         Key([mod], "s", lazy.spawn("spotify"), desc="run spotify"), 
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
@@ -65,21 +84,22 @@ keys = [
         Key([mod], "v", lazy.spawn("code"), desc="Spawn vscode"),
         ]
 
-group_names = [("WWW", {'layout': 'monadtall'}),
-        ("CODE", {'layout': 'monadtall'}),
-        ("SSH", {'layout': 'monadtall'}),
-        ("MUS", {'layout': 'monadtall'}),
-        ("GFX", {'layout': 'floating'})]
+groups = [Group("WWW", layout='monadtall'),
+        Group("WEB", layout='monadtall'),
+        Group("CODE", layout='monadtall'),
+        Group("MUS", layout='monadtall'),
+        Group("SSH", layout='monadtall'),
+        Group("GFX", layout='floating')]
 
-groups = [Group(name, **kwargs) for name, kwargs in group_names]
-
-for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
-    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+# Allow MODKEY+[0 through 9] to bind to groups, see https://docs.qtile.org/en/stable/manual/config/groups.html
+# MOD4 + index Number : Switch to Group[index]
+# MOD4 + shift + index Number : Send active window to another Group
+from libqtile.dgroups import simple_key_binder
+dgroups_key_binder = simple_key_binder("mod4")
 
 layout_theme = {"border_width": 2,
         "margin": 4,
-#        "border_focus": "#53e8da",
+        #        "border_focus": "#53e8da",
         "border_focus": "#ffffff",
         "border_normal": "1D2330"
         }
@@ -175,11 +195,11 @@ def init_widgets_list():
                 format = '{name}',
                 ),
             widget.Chord(
-                chords_colors={
-                    'launch': ("#ff0000", "#ffffff"),
-                    },
-                name_transform=lambda name: name.upper(),
-                ),
+                    chords_colors={
+                        'launch': ("#ff0000", "#ffffff"),
+                        },
+                    name_transform=lambda name: name.upper(),
+                    ),
             widget.Systray(),
             widget.TextBox(
                     text = '',
@@ -320,16 +340,21 @@ def init_widgets_list():
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
+def init_widgets_screen2():
+    widgets_screen2 = init_widgets_list()
+    return widgets_screen2
 
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=3, opacity=0.6, size=22))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=3, opacity=0.6, size=22)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=3, opacity=0.6, size=22))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
     widgets_list = init_widgets_list()
     widgets_screen1 = init_widgets_screen1()
+    widgets_screen2 = init_widgets_screen2()
 
 
 # Drag floating layouts.
@@ -345,9 +370,7 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.call([home])
 
-dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
-main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
