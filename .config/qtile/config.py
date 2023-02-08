@@ -84,7 +84,7 @@ keys = [
         Key([mod], "v", lazy.spawn("code"), desc="Spawn vscode"),
         ]
 
-groups = [Group("WWW", layout='monadtall'),
+groups = [Group("GEN", layout='monadtall'),
         Group("WEB", layout='monadtall'),
         Group("CODE", layout='monadtall'),
         Group("MUS", layout='monadtall'),
@@ -271,7 +271,7 @@ def init_widgets_list():
                     ),
             widget.CheckUpdates(
                     update_interval = 60,
-                    distro = "Arch",
+                    distro = "Arch_paru_Sup",
                     display_format = "{updates} Updates",
                     no_update_string = 'No updates',
                     foreground = colors[2],
