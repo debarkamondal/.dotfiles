@@ -20,11 +20,12 @@ alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias ls='ls --color'
 alias la='ls -la --color'
 alias grep='grep --color=auto'
+alias dc='docker-compose'
 
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
 zstyle ':completion::complete:*' gain-privileges 1
 #export PATH=$HOME/.config/rofi/bin:$PATH
-export DOCKER_HOST=ssh://pi4
+#export DOCKER_HOST=ssh://pi4
 export VISUAL=vim
 export EDITOR=vim
