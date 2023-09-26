@@ -29,3 +29,4 @@ zstyle ':completion::complete:*' gain-privileges 1
 #export DOCKER_HOST=ssh://pi4
 export VISUAL=vim
 export EDITOR=vim
+source /usr/share/nvm/init-nvm.sh
