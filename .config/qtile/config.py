@@ -82,6 +82,7 @@ keys = [
         Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
         Key([mod], "e", lazy.spawn(file_manager), desc="Spawn file manager"),
         Key([mod], "v", lazy.spawn("code"), desc="Spawn vscode"),
+        Key([mod, "shift"], "s", lazy.spawn("scrot -s"), desc="Take a screenshot"),
         ]
 
 groups = [Group("GEN", layout='monadtall'),
