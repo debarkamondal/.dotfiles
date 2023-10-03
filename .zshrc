@@ -21,6 +21,7 @@ alias ls='ls --color'
 alias la='ls -la --color'
 alias grep='grep --color=auto'
 alias dc='docker-compose'
+alias vim='nvim'
 
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
