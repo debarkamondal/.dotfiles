@@ -3,31 +3,47 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
+setopt COMPLETE_ALIASES
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/dezire/.zshrc'
+zstyle ':completion::complete:*' gain-privileges 1
+zstyle ':completion:*' menu select
 
-autoload -Uz compinit
-compinit
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/nvm/init-nvm.sh
 
-neofetch
-eval "$(starship init zsh)"
 
+alias esp-export='. $HOME/esp/esp-idf/export.sh'
 alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias ls='ls --color'
 alias la='ls -la --color'
 alias grep='grep --color=auto'
 alias dc='docker-compose'
-alias vim='nvim'
+alias vim='nvim_dir_setter'
 
-zstyle ':completion:*' menu select
-setopt COMPLETE_ALIASES
-zstyle ':completion::complete:*' gain-privileges 1
 #export PATH=$HOME/.config/rofi/bin:$PATH
 #export DOCKER_HOST=ssh://pi4
 export VISUAL=vim
 export EDITOR=vim
-source /usr/share/nvm/init-nvm.sh
+
+# pnpm
+export PNPM_HOME="/home/dezire/.local/share/pnpm"
+case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Open specified folder as root for nvim
+nvim_dir_setter(){
+    if [ -d ${@:$#} ]; then
+        cd ${@:$#}  && nvim .
+    else
+        nvim $@
+    fi
+}
+
+fastfetch
+eval "$(starship init zsh)"

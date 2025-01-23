@@ -1,0 +1,146 @@
+@define-color backgroundlight #FFFFFF;
+@define-color backgrounddark #FFFFFF;
+@define-color workspacesbackground1 #FFFFFF;
+@define-color workspacesbackground2 #CCCCCC;
+@define-color bordercolor #FFFFFF;
+@define-color textcolor1 #000000;
+@define-color textcolor2 #000000;
+@define-color textcolor3 #FFFFFF;
+@define-color iconcolor #FFFFFF;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Hack Nerd Font", "Symbols Nerd Font";
+    font-size: 14px;
+    padding: 2px 0px;
+    margin: 0px 2px;
+}
+label.module {
+    padding: 0 10px;
+}
+
+#window{ 
+    margin: 0px 10px;
+}
+window#waybar {
+    background-color: rgba(0,0,0,0.4);
+    /*border-bottom: 0px solid #ffffff;*/
+    /* color: #FFFFFF; */
+    transition-property: background-color;
+    transition-duration: .2s;
+    padding: 50px;
+}
+
+#workspaces {
+    margin: 0px 5px;
+    border-radius: 15px;
+    border: 0px;
+    font-weight: bold;
+    font-style: normal;
+    color: @textcolor1;
+}
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 3px;
+    border-radius: 15px;
+    border: 0px;
+    color: @textcolor3;
+    transition: all 0.2s ease-in-out;
+}
+
+#workspaces button.active {
+    color: @textcolor1;
+    background: @backgrounddark;
+    border-radius: 15px;
+    min-width: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    color: @textcolor1;
+    background: @workspacesbackground2;
+    border-radius: 15px;
+}
+
+#clock,#pulseaudio,#window{
+    background-color: @backgrounddark;
+    color: @textcolor1;
+    border-radius: 15px;
+    min-width: 15px;
+    padding: 3px 7px;
+}
+#clock{
+    margin: 0px 5px 0px 0px;
+}
+#battery{
+    background-color: @backgrounddark;
+    color: @textcolor1;
+    border-radius: 0px 15px 15px 0px;
+    padding: 3px 7px;
+    margin-left: 0px;
+} #power-profiles-daemon{
+    border-radius: 15px 0px 0px 15px;
+    border: 3px solid @backgrounddark;
+    min-width: 20px;
+    padding: 3px 7px;
+    margin-right: 0px
+}
+
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#battery.charging, #battery.plugged {
+    color: @textcolor2;
+    background-color: @backgroundlight;
+}
+
+@keyframes blink {
+    to {
+        background-color: @backgroundlight;
+        color: @textcolor2;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: @textcolor3;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+tooltip {
+    border-radius: 10px;
+    background-color: @backgroundlight;
+    opacity:0.8;
+    padding:20px;
+    margin:0px;
+}
+
+tooltip label {
+    color: @textcolor2;
+}
+
+
+window#waybar.empty #window {
+    background-color:transparent;
+}
+#custom-power{
+    margin-right: 10px;
+    padding: 0;
+    font-size:16px;
+    color: @iconcolor;
+}
