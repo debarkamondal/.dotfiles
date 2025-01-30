@@ -63,6 +63,12 @@ window#waybar {
     border-radius: 15px;
 }
 
+#backlight {
+    border-radius: 15px;
+    color: @textcolor3;
+    border: 3px solid @backgrounddark;
+}
+
 #clock,#pulseaudio,#window{
     background-color: @backgrounddark;
     color: @textcolor1;
@@ -70,17 +76,17 @@ window#waybar {
     min-width: 15px;
     padding: 3px 7px;
 }
-#clock{
-    margin: 0px 5px 0px 0px;
-}
 #battery{
     background-color: @backgrounddark;
     color: @textcolor1;
     border-radius: 0px 15px 15px 0px;
     padding: 3px 7px;
     margin-left: 0px;
-} #power-profiles-daemon{
+} 
+
+#power-profiles-daemon{
     border-radius: 15px 0px 0px 15px;
+    color: @textcolor3;
     border: 3px solid @backgrounddark;
     min-width: 20px;
     padding: 3px 7px;
@@ -90,6 +96,10 @@ window#waybar {
 
 #network.disconnected {
     background-color: #f53c3c;
+}
+
+#tray {
+    margin-right: 15px;
 }
 
 #tray > .passive {
@@ -139,7 +149,7 @@ window#waybar.empty #window {
     background-color:transparent;
 }
 #custom-power{
-    margin-right: 10px;
+    margin: 0px 11px 0px 10px;
     padding: 0;
     font-size:16px;
     color: @iconcolor;
