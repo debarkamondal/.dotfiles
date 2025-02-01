@@ -7,6 +7,7 @@ return {
         "nvim-lua/plenary.nvim"
     },
 
+    lazy = true,
     config = function()
         require('telescope').setup({})
 
@@ -16,15 +17,14 @@ return {
         vim.keymap.set('n', '<leader>pws', function()
             local word = vim.fn.expand("<cWORD>")
             builtin.grep_string({ search = word })
-        end, {desc = "search word globally"})
+        end, { desc = "search word globally" })
         vim.keymap.set('n', '<leader>pWs', function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
-        end, {desc = "search word locally"})
+        end, { desc = "search word locally" })
         vim.keymap.set('n', '<leader>ps', function()
             builtin.grep_string({ search = vim.fn.input("Grep > ") })
         end)
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     end
 }
-
