@@ -7,7 +7,6 @@ return {
         "nvim-lua/plenary.nvim"
     },
 
-    lazy = true,
     config = function()
         require('telescope').setup({})
 

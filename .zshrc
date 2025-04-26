@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/dezire/.zsh/completions:"* ]]; then export FPATH="/home/dezire/.zsh/completions:$FPATH"; fi
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -23,6 +25,7 @@ alias la='ls -la --color'
 alias grep='grep --color=auto'
 alias dc='docker-compose'
 alias vim='nvim_dir_setter'
+alias esp8266-export='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin" && export IDF_PATH="~/esp/ESP8266_RTOS_SDK"'
 
 #export PATH=$HOME/.config/rofi/bin:$PATH
 #export DOCKER_HOST=ssh://pi4
@@ -47,3 +50,11 @@ nvim_dir_setter(){
 
 fastfetch
 eval "$(starship init zsh)"
+. "/home/dezire/.deno/env"
+
+# bun completions
+[ -s "/home/dezire/.bun/_bun" ] && source "/home/dezire/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
