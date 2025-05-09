@@ -1,3 +1,5 @@
-return{
-	"mbbill/undotree", name="undotree"
+return {
+    "mbbill/undotree",
+    name = "undotree",
+    lazy = true
 }

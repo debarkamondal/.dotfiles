@@ -58,11 +58,13 @@ return {
         cmp.setup({
             sources = {
                 { name = 'nvim_lsp' },
+                { name = "supermaven" },
             },
             snippet = {
                 expand = function(args)
                     -- You need Neovim v0.10 to use vim.snippet
                     vim.snippet.expand(args.body)
+                    vim.lsp.enable('biome')
                 end,
             },
             mapping = cmp.mapping.preset.insert({}),

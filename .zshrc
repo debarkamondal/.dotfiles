@@ -47,9 +47,6 @@ nvim_dir_setter(){
         nvim $@
     fi
 }
-
-fastfetch
-eval "$(starship init zsh)"
 . "/home/dezire/.deno/env"
 
 # bun completions
@@ -58,3 +55,5 @@ eval "$(starship init zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(starship init zsh)"
