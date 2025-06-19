@@ -1,5 +1,5 @@
 return {
-    "mbbill/undotree",
-    name = "undotree",
-    lazy = true
+	"mbbill/undotree",
+	name = "undotree",
+	lazy = true,
 }

@@ -18,20 +18,25 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/nvm/init-nvm.sh
 
 
-alias esp-export='. $HOME/esp/esp-idf/export.sh'
 alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias ls='ls --color'
 alias la='ls -la --color'
 alias grep='grep --color=auto'
 alias dc='docker-compose'
 alias vim='nvim_dir_setter'
+alias esp-export='. $HOME/esp/esp-idf/export.sh'
 alias esp8266-export='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin" && export IDF_PATH="~/esp/ESP8266_RTOS_SDK"'
 
-#export PATH=$HOME/.config/rofi/bin:$PATH
-#export DOCKER_HOST=ssh://pi4
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 export VISUAL=vim
 export EDITOR=vim
 
+#Android studio
+export ANDROID_HOME=$HOME/Android/Sdk 
+export PATH=$PATH:$ANDROID_HOME/emulator 
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 # pnpm
 export PNPM_HOME="/home/dezire/.local/share/pnpm"
 case ":$PATH:" in
@@ -52,8 +57,5 @@ nvim_dir_setter(){
 # bun completions
 [ -s "/home/dezire/.bun/_bun" ] && source "/home/dezire/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(starship init zsh)"

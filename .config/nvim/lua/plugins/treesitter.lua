@@ -1,33 +1,16 @@
-return{
-	"nvim-treesitter/nvim-treesitter",
-	build = function()
-		require("nvim-treesitter.install").update({ with_sync = true })()
-	end,
-	config = function()
-
-		require'nvim-treesitter.configs'.setup {
-			ensure_installed = { "c", "lua", "vim", "javascript", "typescript"},
-			-- Install parsers synchronously (only applied to `ensure_installed`)
-			sync_install = false,
-			auto_install = true,
-			ignore_install = {  },
-			highlight = {
-				enable = true,
-				disable = function(lang, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-						return true
-					end
-				end,
-
-				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-				-- Using this option may slow down your editor, and you may see some duplicate highlights.
-				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = false,
-			},
-		}
-	end
-}
-
+return   {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    opts = {
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      -- Autoinstall languages that are not installed
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'ruby' },
+      },
+      indent = { enable = true, disable = { 'ruby' } },
+    }
+  }
