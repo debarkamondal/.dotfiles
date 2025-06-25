@@ -1,3 +1,6 @@
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-export EDGE_PATH=/usr/bin/brave
+export FLYCTL_INSTALL="/home/dezire/.fly"
+  export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+if uwsm check may-start && uwsm select; then
+	exec uwsm start hyprland.desktop
+fi

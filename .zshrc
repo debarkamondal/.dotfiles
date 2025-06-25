@@ -13,9 +13,6 @@ zstyle :compinstall filename '/home/dezire/.zshrc'
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*' menu select
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/nvm/init-nvm.sh
 
 
 alias gt='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
@@ -27,22 +24,9 @@ alias vim='nvim_dir_setter'
 alias esp-export='. $HOME/esp/esp-idf/export.sh'
 alias esp8266-export='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin" && export IDF_PATH="~/esp/ESP8266_RTOS_SDK"'
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 export VISUAL=vim
 export EDITOR=vim
 
-#Android studio
-export ANDROID_HOME=$HOME/Android/Sdk 
-export PATH=$PATH:$ANDROID_HOME/emulator 
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-# pnpm
-export PNPM_HOME="/home/dezire/.local/share/pnpm"
-case ":$PATH:" in
-    *":$PNPM_HOME:"*) ;;
-    *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
 
 # Open specified folder as root for nvim
 nvim_dir_setter(){
@@ -52,10 +36,12 @@ nvim_dir_setter(){
         nvim $@
     fi
 }
-. "/home/dezire/.deno/env"
-
-# bun completions
-[ -s "/home/dezire/.bun/_bun" ] && source "/home/dezire/.bun/_bun"
 
 
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(starship init zsh)"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
