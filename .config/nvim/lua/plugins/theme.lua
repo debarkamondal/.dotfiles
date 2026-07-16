@@ -13,6 +13,7 @@ return {
 				bold = true,
 				italic = true,
 				comments = { italic = false }, -- Disable italics in comments
+				transparency = true,
 			},
 		})
 		vim.cmd.colorscheme("rose-pine-moon")
