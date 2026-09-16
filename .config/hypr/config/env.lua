@@ -1,6 +1,6 @@
 -- Environment variables
 
-hl.env("GDK_SCALE", "2")
+hl.env("GDK_SCALE", "1")
 hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")

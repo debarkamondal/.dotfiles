@@ -23,7 +23,7 @@
 
     width = 350
     height = (0,300)
-    origin = bottom-right
+    origin = top-right
     offset = (20, 20)
 
     # Maximum number of notification (0 means no limit)

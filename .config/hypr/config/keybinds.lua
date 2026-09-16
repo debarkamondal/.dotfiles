@@ -4,24 +4,19 @@
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("uwsm app -- " .. terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("uwsm app -- " .. fileManager))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("uwsm app -- " .. browser))
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("uwsm app -- hyprctl reload"))
-hl.bind("ALT + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("uwsm app -- hyprctl reload"))
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("uwsm app -- wlogout"))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("uwsm app -- hyprlock"))
-hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Y", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 
--- Submap: dmenu
-hl.bind("ALT + SPACE", hl.dsp.submap("dmenu"))
-
-hl.define_submap("dmenu", function()
-    hl.bind("SPACE", hl.dsp.exec_cmd("uwsm app -- " .. menu .. " -show drun"), { repeating = true })
-    hl.bind("D", hl.dsp.exec_cmd("cd ~/.config && ls -a | " .. menu .. " -dmenu | xargs -I {} alacritty -e nvim ~/.config/{}"), { repeating = true })
-    hl.bind("B", hl.dsp.exec_cmd("~/.config/rofi/scripts/bluetoothctl.sh"), { repeating = true })
-    hl.bind("V", hl.dsp.exec_cmd("~/.config/rofi/scripts/image-preview.sh | " .. menu .. " -dmenu | cliphist decode | wl-copy"), { repeating = true })
-    hl.bind("escape", hl.dsp.submap("reset"))
-end)
+-- Mac-like Spotlight and Extras
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("uwsm app -- " .. menu .. " -show drun"))
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("~/.config/rofi/scripts/image-preview.sh | " .. menu .. " -dmenu | cliphist decode | wl-copy"))
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("uwsm app -- rofi -show emoji"))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("uwsm app -- rofi -show find -modi find:~/.config/rofi/scripts/find-files.sh"))
 
 -- Toggle waybar
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill waybar || uwsm app -- waybar"), { release = true })
@@ -36,16 +31,16 @@ hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    hl.bind("CTRL + " .. key, hl.dsp.focus({ workspace = i }))
+    hl.bind("CTRL + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
-hl.bind("CTRL + SHIFT + s", hl.dsp.exec_cmd("~/.config/hypr/Scripts/screenshot.sh full"))
-hl.bind("CTRL + SHIFT + p", hl.dsp.exec_cmd("~/.config/hypr/Scripts/screenshot.sh region"))
+hl.bind(mainMod .. " + SHIFT + s", hl.dsp.exec_cmd("~/.config/hypr/Scripts/screenshot.sh full"))
+hl.bind(mainMod .. " + SHIFT + p", hl.dsp.exec_cmd("~/.config/hypr/Scripts/screenshot.sh region"))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

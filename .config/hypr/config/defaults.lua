@@ -1,6 +1,6 @@
 -- Default variables and programs
 
-mainMod = "CTRL"
+mainMod = "SUPER"
 terminal = "ghostty"
 fileManager = "dolphin"
 menu = "rofi"

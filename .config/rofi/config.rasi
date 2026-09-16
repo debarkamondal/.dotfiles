@@ -1,5 +1,6 @@
 configuration {
-/*	modes: "window,drun,run,ssh";*/
+	modes: "drun,emoji,clipboard:/home/dezire/.config/rofi/scripts/image-preview.sh";
+	backend: "wtype";
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -35,7 +36,7 @@ configuration {
 /*	case-sensitive: false;*/
 /*	case-smart: false;*/
 /*	cycle: true;*/
-	sidebar-mode: true;
+/*	sidebar-mode: true;*/
 /*	hover-select: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
@@ -50,7 +51,7 @@ configuration {
 /*	threads: 0;*/
 /*	scroll-method: 0;*/
 /*	window-format: "{w}    {c}   {t}";*/
-/*	click-to-exit: true;*/
+	click-to-exit: true;
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	combi-display-format: "{mode} {text}";*/

@@ -9,6 +9,7 @@ hl.config({
         kb_rules = "",
         follow_mouse = 1,
         sensitivity = 0.1,
+	scroll_factor = 1.5,
         touchpad = {
             natural_scroll = true,
             disable_while_typing = true,
@@ -30,3 +31,12 @@ hl.device({
     name = "epic-mouse-v1",
     sensitivity = -0.5,
 })
+
+hl.monitor({
+  output = "HDMI-A-1",
+  mode = "2560x1440@99.95",
+  cm = 'srgb',
+  sdrbrightness = 1.8,
+  sdrsaturation = 0.7
+})
+
