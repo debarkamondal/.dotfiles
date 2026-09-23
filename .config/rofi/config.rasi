@@ -1,5 +1,5 @@
 configuration {
-	modes: "drun,emoji,clipboard:/home/dezire/.config/rofi/scripts/image-preview.sh";
+	modes: "drun";
 	backend: "wtype";
 /*	font: "mono 12";*/
 /*	location: 0;*/
