@@ -21,13 +21,9 @@ hl.window_rule({
     no_focus = true,
 })
 
--- Enable blur and ignorezero for Ghostty
-hl.config({
-    windowrulev2 = {
-        "blur, class:^(com.mitchellh.ghostty)$",
-        "ignorezero, class:^(com.mitchellh.ghostty)$",
-    }
-})
+-- Blur is configured globally in config/theme.lua (decoration.blur).
+-- Note: per-window `blur` / `ignorezero` rules no longer exist as of 0.56.
+-- Use `no_blur = true` to exclude a window from blur instead.
 
 
 

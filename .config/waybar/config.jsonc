@@ -14,7 +14,7 @@
     ],
     "modules-right": [
         "tray",
-        "mpd",
+        "custom/media",
         "custom/network_speed",
         "custom/cpu_ram",
 //        "backlight",
@@ -112,8 +112,9 @@
         "format": "{}"
     },
     "custom/cpu_ram": {
-        "exec": "~/.config/waybar/cpu_ram.sh",
+        "exec": "~/.config/waybar/cpu_ram_json.sh",
         "interval": 5,
+        "return-type": "json",
         "format": "{}"
     },
     "pulseaudio": {
@@ -138,16 +139,14 @@
         "on-click-right": "pavucontrol"
     },
     "custom/media": {
-        "format": "{icon} {text}",
+        "exec": "~/.config/waybar/media.py",
+        "interval": 2,
         "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
+        "format": "{}",
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "on-click": "playerctl play-pause",
+        "on-click-middle": "playerctl previous",
+        "on-click-right": "playerctl next"
     },
     "custom/power": {
         "format" : "⏻",

@@ -76,12 +76,23 @@ window#waybar {
     min-width: 10px;
 }
 
+#custom-cpu_ram, #clock {
+    border: 2px solid transparent;
+}
+
+#custom-cpu_ram, #clock, #custom-network_speed, #pulseaudio {
+    min-height: 24px;
+}
+
+#custom-cpu_ram, #custom-network_speed {
+    min-height: 26px;
+}
+
 #custom-network_speed,#pulseaudio{
     background-color: transparent;
     color: @textcolor3;
     border-radius: 15px;
-    min-width: 15px;
-    padding: 2px 5px;
+    padding: 0px 10px;
     border: 2px solid @backgrounddark;
 }
 #battery{
@@ -107,7 +118,7 @@ window#waybar {
 }
 
 #tray {
-    margin-right: 15px;
+    margin: 0px 3px;
 }
 
 #tray > .passive {
@@ -156,24 +167,23 @@ tooltip label {
 window#waybar.empty #window {
     background-color:transparent;
 }
-#custom-power{
-    margin: 0px 10px 0px 6px;
+#custom-media {
+    color: @textcolor3;
 }
-#custom-power label {
+#custom-power{
     font-size: 20px;
     color: @iconcolor;
 }
 
-#custom-network_speed {
-    min-width: 120px;
+#custom-media, #custom-power {
+    padding: 0px 6px;
 }
-#pulseaudio {
-    min-width: 65px;
+
+#custom-cpu_ram, #clock {
+    padding: 0px 10px;
 }
-#pulseaudio.muted {
-    /* font-size: 16px; */
-}
-#custom-cpu_ram {
-    padding: 0px 0px 0px 12px;
-    min-width: 90px;
+
+#custom-media, #custom-power, #custom-cpu_ram, #clock,
+#custom-network_speed, #pulseaudio {
+    margin: 0px 3px;
 }
