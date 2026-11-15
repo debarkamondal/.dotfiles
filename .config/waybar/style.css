@@ -1,8 +1,6 @@
 @define-color backgroundlight #FFFFFF;
 @define-color backgrounddark #FFFFFF;
-@define-color workspacesbackground1 #FFFFFF;
 @define-color workspacesbackground2 #CCCCCC;
-@define-color bordercolor #FFFFFF;
 @define-color textcolor1 #000000;
 @define-color textcolor2 #000000;
 @define-color textcolor3 #FFFFFF;
@@ -13,38 +11,33 @@
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "Symbols Nerd Font";
     font-size: 14px;
-    padding: 2px 0px;
-    margin: 0px 2px;
+    padding: 2px 0;
+    margin: 0 2px;
 }
+
 label.module {
     padding: 0 10px;
 }
 
-#window{ 
-    padding: 0px 10px;
-}
 window#waybar {
-    background-color: rgba(0,0,0,0.4);
-    /*border-bottom: 0px solid #ffffff;*/
-    /* color: #FFFFFF; */
+    background-color: rgba(0, 0, 0, 0.4);
     transition-property: background-color;
     transition-duration: .2s;
     padding: 50px;
 }
 
 #workspaces {
-    margin: 0px 5px;
+    margin: 0 5px;
     border-radius: 15px;
-    border: 0px;
     font-weight: bold;
     font-style: normal;
     color: @textcolor1;
 }
+
 #workspaces button {
-    padding: 0px 5px;
-    margin: 0px 3px;
+    padding: 0 5px;
+    margin: 0 3px;
     border-radius: 15px;
-    border: 0px;
     color: @textcolor3;
     transition: all 0.2s ease-in-out;
 }
@@ -52,7 +45,6 @@ window#waybar {
 #workspaces button.active {
     color: @textcolor1;
     background: @backgrounddark;
-    border-radius: 15px;
     min-width: 15px;
     transition: all 0.3s ease-in-out;
 }
@@ -60,56 +52,30 @@ window#waybar {
 #workspaces button:hover {
     color: @textcolor1;
     background: @workspacesbackground2;
-    border-radius: 15px;
 }
 
-#backlight {
-    border-radius: 15px;
-    color: @textcolor3;
-    border: 3px solid @backgrounddark;
-}
-
-#custom-cpu_ram,#clock,#window{
+/* Filled widgets */
+#custom-cpu_ram, #clock, #window {
     background-color: @backgrounddark;
     color: @textcolor1;
     border-radius: 15px;
-    min-width: 10px;
+    padding: 0 10px;
 }
 
-#custom-cpu_ram, #clock {
-    border: 2px solid transparent;
+window#waybar.empty #window {
+    background-color: transparent;
 }
 
-#custom-cpu_ram, #clock, #custom-network_speed, #pulseaudio {
-    min-height: 24px;
-}
-
-#custom-cpu_ram, #custom-network_speed {
-    min-height: 26px;
-}
-
-#custom-network_speed,#pulseaudio{
+/* Outlined widgets */
+#custom-network_speed, #pulseaudio {
     background-color: transparent;
     color: @textcolor3;
     border-radius: 15px;
-    padding: 0px 10px;
+    padding: 0 10px;
     border: 2px solid @backgrounddark;
 }
-#battery{
-    background-color: @backgrounddark;
-    color: @textcolor1;
-    border-radius: 0px 15px 15px 0px;
-    padding: 3px 5px;
-    margin-left: 0px;
-} 
-
-#power-profiles-daemon{
-    border-radius: 15px 0px 0px 15px;
-    color: @textcolor3;
-    border: 3px solid @backgrounddark;
-    min-width: 20px;
-    padding: 3px 7px;
-    margin-right: 0px
+#custom-cpu_ram,#pulseaudio {
+    padding: 4px 10px;
 }
 
 
@@ -117,8 +83,19 @@ window#waybar {
     background-color: #f53c3c;
 }
 
-#tray {
-    margin: 0px 3px;
+/* Unframed widgets and shared spacing */
+#custom-media, #custom-power {
+    color: @iconcolor;
+    padding: 0 6px;
+}
+
+#custom-power {
+    font-size: 20px;
+}
+
+#custom-media, #custom-power, #custom-cpu_ram, #clock,
+#custom-network_speed, #pulseaudio, #tray {
+    margin: 0 3px;
 }
 
 #tray > .passive {
@@ -128,6 +105,30 @@ window#waybar {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
+}
+
+/* Optional modules */
+#backlight {
+    border-radius: 15px;
+    color: @textcolor3;
+    border: 3px solid @backgrounddark;
+}
+
+#battery {
+    background-color: @backgrounddark;
+    color: @textcolor1;
+    border-radius: 15px;
+    padding: 3px 5px;
+    margin-left: 0;
+}
+
+#power-profiles-daemon {
+    border-radius: 15px 0 0 15px;
+    color: @textcolor3;
+    border: 3px solid @backgrounddark;
+    min-width: 20px;
+    padding: 3px 7px;
+    margin-right: 0;
 }
 
 #battery.charging, #battery.plugged {
@@ -151,39 +152,15 @@ window#waybar {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+
 tooltip {
     border-radius: 10px;
     background-color: @backgroundlight;
-    opacity:0.8;
-    padding:20px;
-    margin:0px;
+    opacity: 0.8;
+    padding: 20px;
+    margin: 0;
 }
 
 tooltip label {
     color: @textcolor2;
-}
-
-
-window#waybar.empty #window {
-    background-color:transparent;
-}
-#custom-media {
-    color: @textcolor3;
-}
-#custom-power{
-    font-size: 20px;
-    color: @iconcolor;
-}
-
-#custom-media, #custom-power {
-    padding: 0px 6px;
-}
-
-#custom-cpu_ram, #clock {
-    padding: 0px 10px;
-}
-
-#custom-media, #custom-power, #custom-cpu_ram, #clock,
-#custom-network_speed, #pulseaudio {
-    margin: 0px 3px;
 }
